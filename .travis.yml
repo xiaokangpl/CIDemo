@@ -1,6 +1,48 @@
+# .travis.yml 文件
+
+# 声明构建语言环境
+
 language: android
-dist: trusty
-android:
+android:        # 配置信息
   components:
-    - build-tools-30.0.3
-    - android-30
+    # 你可能需要修改下面两项的版本
+    - build-tools-29.0.2
+    - android-29
+    # Android Support Repository
+    - extra-android-m2repository
+    # Support Library
+    - extra-android-support
+
+before_install:
+  - chmod +x gradlew
+  - gem install fir-cli
+script:
+  # 生成 APK
+  - ./gradlew assembleRelease
+before_deploy:
+  - ls app/build/outputs/apk/release
+# 部署
+deploy:
+  # 部署到GitHub Release。
+  # 除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
+  provider: releases
+  # Github oauth token
+  api_key: "${GH_TOKEN}"
+  # 部署文件路径；对于Android就部署生成的 apk 文件
+  file: app/build/outputs/apk/release/app-release.apk
+  # 避免 Travis CI在部署之前清空生成的APK文件
+  skip_cleanup: true
+  # 发布时机
+  on:
+    # tags设置为true表示只有在有tag的情况下才部署
+    tags: true
+    all_branches: true
+after_deploy:
+  - fir login d9a7aba03bd8015a95d9b3a66c9e43e6
+  - fir p app/build/outputs/apk/release/app-release.apk #自动发布应用至fir内测平台
+
+  ##配置s3
+  #  provider: s3
+  #  access_key_id:
+  #  secret_access_key:
+  #  bucket:

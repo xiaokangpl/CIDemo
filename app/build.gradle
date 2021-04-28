@@ -4,8 +4,22 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    signingConfigs {
+        debug {
+            storeFile file('demo.jks')
+            storePassword '123456'
+            keyAlias 'demo'
+            keyPassword '123456'
+        }
+        release {
+            storeFile file('demo.jks')
+            storePassword '123456'
+            keyAlias 'demo'
+            keyPassword '123456'
+        }
+    }
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.example.cidemo"
@@ -13,14 +27,17 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug{
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -33,7 +50,6 @@ android {
 }
 
 dependencies {
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
