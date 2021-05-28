@@ -35,9 +35,13 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            applicationIdSuffix project.hasProperty("SUFFIX")?SUFFIX: System.getenv("SUFFIX")
+
         }
         debug{
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
+            applicationIdSuffix project.hasProperty("SUFFIX")?SUFFIX: System.getenv("SUFFIX")
+
         }
     }
     compileOptions {
