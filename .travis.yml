@@ -1,18 +1,22 @@
 # .travis.yml 文件
-
-# 声明构建语言环境
-
-language: android
-android:        # 配置信息
-  components:
-    # 你可能需要修改下面两项的版本
-    - build-tools-29.0.2
-    - android-29
-    # Android Support Repository
-    - extra-android-m2repository
-    # Support Library
-    - extra-android-support
-
+branches:
+  only:
+    - master
+    - develop
+matrix:
+  include:
+    - os: linux
+      sudo: false
+      language: android
+      android:
+        components:
+          # 你可能需要修改下面两项的版本
+          - build-tools-29.0.2
+          - android-29
+          # Android Support Repository
+          - extra-android-m2repository
+          # Support Library
+          - extra-android-support
 before_install:
   - chmod +x gradlew
 script:
