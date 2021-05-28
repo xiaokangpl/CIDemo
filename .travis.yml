@@ -21,7 +21,6 @@ matrix:
           - extra-android-support
 before_install:
   - chmod +x gradlew
-  - gem install fir-cli
 script:
   # 生成 APK
   - ./gradlew assembleRelease
@@ -43,9 +42,7 @@ deploy:
     # tags设置为true表示只有在有tag的情况下才部署
     tags: true
     all_branches: true
-after_deploy:
-  - fir login d9a7aba03bd8015a95d9b3a66c9e43e6
-  - fir p app/build/outputs/apk/release/app-release.apk #自动发布应用至fir内测平台
+
 
   ##配置s3
   #  provider: s3

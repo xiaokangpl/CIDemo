@@ -35,10 +35,17 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            resValue "string", "home_text", project.hasProperty("SUFFIX")?SUFFIX: System.getenv("SUFFIX")
+            applicationIdSuffix project.hasProperty("SUFFIX")?SUFFIX: System.getenv("SUFFIX")
         }
         debug{
             signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
+            resValue "string", "home_text", project.hasProperty("SUFFIX")?SUFFIX: System.getenv("SUFFIX")
+            applicationIdSuffix project.hasProperty("SUFFIX")?SUFFIX: System.getenv("SUFFIX")
+
         }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
