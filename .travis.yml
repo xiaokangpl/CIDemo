@@ -1,6 +1,4 @@
 # .travis.yml 文件
-
-# 声明构建语言环境
 branches:
   only:
     - master
