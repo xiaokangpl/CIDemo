@@ -43,7 +43,6 @@ android {
             signingConfig signingConfigs.debug
             resValue "string", "home_text", System.getenv("SUFFIX")==null?SUFFIX:System.getenv("SUFFIX")
             applicationIdSuffix project.hasProperty("SUFFIX")?SUFFIX: System.getenv("SUFFIX")
-
         }
 
     }
