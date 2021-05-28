@@ -42,10 +42,3 @@ deploy:
     # tags设置为true表示只有在有tag的情况下才部署
     tags: true
     all_branches: true
-
-
-  ##配置s3
-  #  provider: s3
-  #  access_key_id:
-  #  secret_access_key:
-  #  bucket:
