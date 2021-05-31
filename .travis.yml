@@ -5,7 +5,7 @@ branches:
     - master
     - develop
     - staging
-    - /v\d+\.\d+/
+    - /v\d+\.\d+\.\d+\..*/
 android:        # 配置信息
   components:
     # 你可能需要修改下面两项的版本
