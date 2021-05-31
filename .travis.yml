@@ -19,6 +19,7 @@ before_install:
   - chmod +x gradlew
 script: |-
   # 生成 APK
+  echo ${TRAVIS_BRANCH}
   if [ "${TRAVIS_BRANCH}" == "master" ]
   then
     ./gradlew assembleProdReleas
@@ -39,7 +40,7 @@ deploy:
   # Github oauth token
   api_key: "${GH_TOKEN}"
   # 部署文件路径；对于Android就部署生成的 apk 文件
-  file: "${FILE_PATH}"
+  file:
   # 避免 Travis CI在部署之前清空生成的APK文件
   skip_cleanup: true
   # 发布时机
