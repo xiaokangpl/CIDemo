@@ -1,4 +1,5 @@
 # .travis.yml 文件
+language: android
 branches:
   only:
     - master
