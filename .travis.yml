@@ -21,15 +21,17 @@ before_install:
   - chmod +x gradlew
 script:
   # 生成 APK
-  - if [ "master" == "${TRAVIS_BRANCH}" ]
+  - if [ "${TRAVIS_BRANCH}" == "master" ]
     then
-        ./gradlew assembleProdRelease
-    else if[ "staging" == "${TRAVIS_BRANCH}" ]
+    ./gradlew assembleProdReleas
+    elif [ "${TRAVIS_BRANCH}"== "staging" ]
     then
-        ./gradlew assembleStageRelease
-    else if[ "develop" == "${TRAVIS_BRANCH}" ]
+    ./gradlew assembleStageRelease
+    elif [ "${TRAVIS_BRANCH}" == "develop" ]
     then
-        ./gradlew assembleDevRelease
+    ./gradlew assembleDevRelease
+    else
+    ./gradlew assembleDevRelease
     fi
 before_deploy:
   - ls app/build/outputs/apk/release
