@@ -21,7 +21,7 @@ before_install:
   - chmod +x gradlew
 script:
   # 生成 APK
-  - ./gradlew assembleRelease
+  - ./gradlew assembleDevRelease
 before_deploy:
   - ls app/build/outputs/apk/release
 # 部署
