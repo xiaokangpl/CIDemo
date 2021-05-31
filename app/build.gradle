@@ -43,6 +43,11 @@ android {
             applicationId 'com.example.cidemo.stage'
             resValue "string", "home_text", System.getenv("SUFFIX")==null?SUFFIX:System.getenv("SUFFIX")
         }
+        prod {
+            dimension "app"
+            applicationId 'com.example.cidemo'
+            resValue "string", "home_text", System.getenv("SUFFIX")==null?SUFFIX:System.getenv("SUFFIX")
+        }
     }
 
     buildTypes {
