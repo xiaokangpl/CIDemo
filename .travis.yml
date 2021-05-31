@@ -4,20 +4,15 @@ branches:
     - master
     - develop
     - staging
-matrix:
-  include:
-    - os: linux
-      sudo: false
-      language: android
-      android:
-        components:
-          # 你可能需要修改下面两项的版本
-          - build-tools-29.0.2
-          - android-29
-          # Android Support Repository
-          - extra-android-m2repository
-          # Support Library
-          - extra-android-support
+android:        # 配置信息
+  components:
+    # 你可能需要修改下面两项的版本
+    - build-tools-29.0.2
+    - android-29
+    # Android Support Repository
+    - extra-android-m2repository
+    # Support Library
+    - extra-android-support
 before_install:
   - chmod +x gradlew
 script: |-
