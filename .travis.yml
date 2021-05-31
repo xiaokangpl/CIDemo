@@ -19,20 +19,20 @@ matrix:
           - extra-android-support
 before_install:
   - chmod +x gradlew
-script:
+script: |-
   # 生成 APK
-    if [ "${TRAVIS_BRANCH}" == "master" ]
-    then
-    -./gradlew assembleProdReleas
-    elif [ "${TRAVIS_BRANCH}"== "staging" ]
-    then
-    -./gradlew assembleStageRelease
-    elif [ "${TRAVIS_BRANCH}" == "develop" ]
-    then
-    -./gradlew assembleDevRelease
-    else
-    -./gradlew assembleDevRelease
-    fi
+  if [ "${TRAVIS_BRANCH}" == "master" ]
+  then
+    ./gradlew assembleProdReleas
+  elif [ "${TRAVIS_BRANCH}"== "staging" ]
+  then
+    ./gradlew assembleStageRelease
+  elif [ "${TRAVIS_BRANCH}" == "develop" ]
+  then
+    ./gradlew assembleDevRelease
+  else
+    ./gradlew assembleDevRelease
+  fi
 before_deploy:
   - ls app/build/outputs/apk/release
 # 部署
