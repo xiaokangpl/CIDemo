@@ -40,7 +40,19 @@ deploy:
   # Github oauth token
   api_key: "${GH_TOKEN}"
   # 部署文件路径；对于Android就部署生成的 apk 文件
-  file: "${GH_TOKEN}"
+  file:
+    if [ "${TRAVIS_BRANCH}" =~ "master" ]||[ "${TRAVIS_BRANCH}" == "master" ]
+    then
+    app/build/outputs/apk/prod/release/app-prod-release
+    elif [ "${TRAVIS_BRANCH}"=~ "staging" ]||[ "${TRAVIS_BRANCH}" == "staging" ]
+    then
+    app/build/outputs/apk/stage/release/app-stage-release
+    elif [ "${TRAVIS_BRANCH}" =~ "develop" ]||[ "${TRAVIS_BRANCH}" == "develop" ]
+    then
+    app/build/outputs/apk/dev/release/app-dev-release
+    else
+    app/build/outputs/apk/dev/release/app-dev-release
+    fi
   # 避免 Travis CI在部署之前清空生成的APK文件
   skip_cleanup: true
   # 发布时机
@@ -48,3 +60,4 @@ deploy:
     # tags设置为true表示只有在有tag的情况下才部署
     tags: true
     all_branches: true
+
