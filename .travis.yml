@@ -21,15 +21,15 @@ before_install:
 script: |-
   # 生成 APK
   echo ${TRAVIS_BRANCH}
-  if ["${TRAVIS_BRANCH}" == "master"]
+  if [ "${TRAVIS_BRANCH}" == "master" ]
   then
      echo "master"
     ./gradlew assembleProdDebug
-  elif [ "${TRAVIS_BRANCH}" == "staging"]
+  elif [ "${TRAVIS_BRANCH}" == "staging" ]
   then
     echo "staging"
     ./gradlew assembleStageDebug
-  elif ["${TRAVIS_BRANCH}" == "develop"]
+  elif [ "${TRAVIS_BRANCH}" == "develop" ]
   then
      echo "develop"
     ./gradlew assembleDevDebug
