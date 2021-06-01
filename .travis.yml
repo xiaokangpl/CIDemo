@@ -31,7 +31,7 @@ script: |-
   then
     ./gradlew assembleDevDebug
   else
-    ./gradlew assembleStageRelease && ./gradlew assembleProdRelease
+    ./gradlew assembleStageRelease
   fi
 # 部署
 deploy:
@@ -41,9 +41,7 @@ deploy:
   # Github oauth token
   api_key: "${GH_TOKEN}"
   # 部署文件路径；对于Android就部署生成的 apk 文件
-  file:
-    - "app/build/outputs/apk/prod/release/app-prod-release.apk"
-    - "app/build/outputs/apk/stage/release/app-stage-release.apk"
+  file: app/build/outputs/apk/stage/release/app-stage-release.apk
   # 避免 Travis CI在部署之前清空生成的APK文件
   skip_cleanup: true
   # 发布时机
