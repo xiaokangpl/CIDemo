@@ -34,7 +34,7 @@ script: |-
     ./gradlew assembleStageRelease
   fi
 before_deploy:
-  - ls app/build/outputs/apk/stage/release
+  - ls app/build/outputs/apk/stage
 # 部署
 deploy:
   # 部署到GitHub Release。
