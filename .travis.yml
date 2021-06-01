@@ -17,10 +17,6 @@ android:        # 配置信息
     - extra-android-support
 before_install:
   - chmod +x gradlew
-
-env:
-  global:
-    - FILE_PATH=app/build/outputs/apk/${Travis_branch}/release/app-prod-release
 script: |-
   # 生成 APK
   echo ${TRAVIS_BRANCH}
@@ -47,7 +43,19 @@ deploy:
   # Github oauth token
   api_key: "${GH_TOKEN}"
   # 部署文件路径；对于Android就部署生成的 apk 文件
-  file: "${FILE_PATH}"
+  file: |-
+    if [[ "${TRAVIS_BRANCH}"=~"master" ]]
+    then
+      app/build/outputs/apk/prod/release/app-prod-release.apk
+    elif [[ "${TRAVIS_BRANCH}"=~"staging" ]]
+    then
+      app/build/outputs/apk/stage/release/app-stage-release.apk
+    elif [[ "${TRAVIS_BRANCH}"=~"develop" ]]
+    then
+      app/build/outputs/apk/dev/release/app-dev-release.apk
+    else
+      app/build/outputs/apk/dev/release/app-dev-release.apk
+    fi
   # 避免 Travis CI在部署之前清空生成的APK文件
   skip_cleanup: true
   # 发布时机
