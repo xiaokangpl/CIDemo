@@ -28,9 +28,12 @@ script: |-
     ./gradlew assembleStageRelease
   elif [["${TRAVIS_BRANCH}" =~ "develop" ]]
   then
+    echo "develop"
     ./gradlew assembleDevRelease
   else
+    echo "else"
     ./gradlew assembleDevRelease
+
   fi
 # 部署
 deploy:
