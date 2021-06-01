@@ -20,13 +20,13 @@ before_install:
 script: |-
   # 生成 APK
   echo ${TRAVIS_BRANCH}
-  if [[ "${TRAVIS_BRANCH}" =~ "master" ]]
+  if [[ "${TRAVIS_BRANCH}"=~"master" ]]
   then
     ./gradlew assembleProdReleas
-  elif [[ "${TRAVIS_BRANCH}" =~ "staging" ]]
+  elif [[ "${TRAVIS_BRANCH}"=~"staging" ]]
   then
     ./gradlew assembleStageRelease
-  elif [["${TRAVIS_BRANCH}" =~ "develop" ]]
+  elif [["${TRAVIS_BRANCH}"=~"develop" ]]
   then
     echo "develop"
     ./gradlew assembleDevRelease
@@ -44,13 +44,13 @@ deploy:
   api_key: "${GH_TOKEN}"
   # 部署文件路径；对于Android就部署生成的 apk 文件
   file:
-    if [[ "${TRAVIS_BRANCH}" == "master" ]]
+    if [[ "${TRAVIS_BRANCH}"=~"master" ]]
     then
     app/build/outputs/apk/prod/release/app-prod-release
-    elif [[ "${TRAVIS_BRANCH}"=~ "staging" ]]
+    elif [[ "${TRAVIS_BRANCH}"=~"staging" ]]
     then
     app/build/outputs/apk/stage/release/app-stage-release
-    elif [[ "${TRAVIS_BRANCH}" =~ "develop" ]]
+    elif [[ "${TRAVIS_BRANCH}"=~"develop" ]]
     then
     app/build/outputs/apk/dev/release/app-dev-release
     else
