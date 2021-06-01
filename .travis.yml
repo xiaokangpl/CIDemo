@@ -23,14 +23,18 @@ script: |-
   echo ${TRAVIS_BRANCH}
   if [[ "${TRAVIS_BRANCH}"=="master" ]]
   then
+     echo "master"
     ./gradlew assembleProdDebug
   elif [[ "${TRAVIS_BRANCH}"=="staging" ]]
   then
+    echo "staging"
     ./gradlew assembleStageDebug
   elif [["${TRAVIS_BRANCH}"=="develop" ]]
   then
+     echo "develop"
     ./gradlew assembleDevDebug
   else
+    echo "else"
     ./gradlew assembleProdRelease
   fi
 before_deploy:
