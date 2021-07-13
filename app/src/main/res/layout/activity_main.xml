@@ -17,6 +17,12 @@
         android:text="注解"
         android:id="@+id/injust"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="abcdefg\nABCDEFG"
+        android:textSize="16sp"/>
+
 
 
     <TextView
