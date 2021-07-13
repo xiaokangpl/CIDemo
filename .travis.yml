@@ -55,5 +55,7 @@ deploy:
   # 发布时机
   on:
     # tags设置为true表示只有在有tag的情况下才部署
-    tags: true
-    all_branches: true
+    tags: false
+    branch:
+      - master
+      - staging
