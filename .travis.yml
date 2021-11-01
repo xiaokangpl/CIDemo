@@ -5,42 +5,39 @@ branches:
     - master
     - develop
     - staging
+    - /v\d+\.\d+\.\d+\..*/
 android:        # 配置信息
   components:
     # 你可能需要修改下面两项的版本
-    - build-tools-29.0.2
-    - android-29
+    - build-tools-30.0.1
+    - platform-tools
+    #    - android-31
     # Android Support Repository
-    - extra-android-m2repository
-    # Support Library
-    - extra-android-support
+#    - extra-android-m2repository
+#    # Support Library
+#    - extra-android-support
+
 before_install:
   - chmod +x gradlew
-script: |-
-  # 生成 APK
-  if [ "${TRAVIS_BRANCH}" == "master" ]
-  then
-    ./gradlew assembleProdReleas
-  elif [ "${TRAVIS_BRANCH}"== "staging" ]
-  then
-    ./gradlew assembleStageRelease
-  elif [ "${TRAVIS_BRANCH}" == "develop" ]
-  then
-    ./gradlew assembleDevRelease
-  else
-    ./gradlew assembleDevRelease
-  fi
-before_deploy:
-  - ls app/build/outputs/apk/release
+
+script:
+  - ./gradlew assembleRelease
 # 部署
 deploy:
   # 部署到GitHub Release。
   # 除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
   provider: releases
-  # Github oauth token
   api_key: "${GH_TOKEN}"
+  #provider: s3
+  #bucket:
+  #access_key_id: "hahaha"
+  #secret_access_key: "bbbbb"
+  #acl: public_read
   # 部署文件路径；对于Android就部署生成的 apk 文件
-  file: app/build/outputs/apk/release/app-release.apk
+  file:
+    - app/build/outputs/apk/staging/release/app-staging-release.apk
+    - app/build/outputs/apk/demo/release/app-demo-release.apk
+    - app/build/outputs/apk/prod/release/app-prod-release.apk
   # 避免 Travis CI在部署之前清空生成的APK文件
   skip_cleanup: true
   # 发布时机
