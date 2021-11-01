@@ -28,6 +28,26 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        flavorDimensions "app"
+    }
+
+    productFlavors {
+        // 包名及、应用名、启动图标
+        dev {
+            dimension "app"
+            applicationId 'com.example.cidemo.dev'
+            resValue "string", "home_text", System.getenv("SUFFIX")==null?SUFFIX:System.getenv("SUFFIX")
+        }
+        stage {
+            dimension "app"
+            applicationId 'com.example.cidemo.stage'
+            resValue "string", "home_text", System.getenv("SUFFIX")==null?SUFFIX:System.getenv("SUFFIX")
+        }
+        prod {
+            dimension "app"
+            applicationId 'com.example.cidemo'
+            resValue "string", "home_text", System.getenv("SUFFIX")==null?SUFFIX:System.getenv("SUFFIX")
+        }
     }
 
     buildTypes {
@@ -35,15 +55,10 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            resValue "string", "home_text", System.getenv("SUFFIX")==null?SUFFIX:System.getenv("SUFFIX")
-            applicationIdSuffix project.hasProperty("SUFFIX")?SUFFIX: System.getenv("SUFFIX")
+
         }
         debug{
-            signingConfig signingConfigs.release
             signingConfig signingConfigs.debug
-            resValue "string", "home_text", System.getenv("SUFFIX")==null?SUFFIX:System.getenv("SUFFIX")
-            applicationIdSuffix project.hasProperty("SUFFIX")?SUFFIX: System.getenv("SUFFIX")
-
         }
 
     }
