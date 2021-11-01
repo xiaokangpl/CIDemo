@@ -1,44 +1,26 @@
-# .travis.yml 文件
+# 部署
+
+language: android
 branches:
   only:
     - master
     - develop
-matrix:
-  include:
-    - os: linux
-      sudo: false
-      language: android
-      android:
-        components:
-          # 你可能需要修改下面两项的版本
-          - build-tools-29.0.2
-          - android-29
-          # Android Support Repository
-          - extra-android-m2repository
-          # Support Library
-          - extra-android-support
+    - staging
+    - /v\d+\.\d+\.\d+\..*/
+android:        # 配置信息
+  components:
+    # 你可能需要修改下面两项的版本
+    - tools
+    - build-tools-30.0.3
+    - platform-tools
+    #    - android-31
+    # Android Support Repository
+#    - extra-android-m2repository
+#    # Support Library
+#    - extra-android-support
+
 before_install:
   - chmod +x gradlew
+
 script:
-  # 生成 APK
   - ./gradlew assembleRelease
-before_deploy:
-  - ls app/build/outputs/apk/release
-env:
-  global:
-    -
-# 部署
-deploy:
-  # 部署到GitHub Release。
-  # 除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
-  provider: releases
-  # Github oauth token
-  api_key: "${GH_TOKEN}"
-  # 部署文件路径；对于Android就部署生成的 apk 文件
-  file: app/build/outputs/apk/release/app-release.apk
-  # 避免 Travis CI在部署之前清空生成的APK文件
-  skip_cleanup: true
-  # 发布时机
-  on:
-    # tags设置为true表示只有在有tag的情况下才部署
-    all_branches: true
